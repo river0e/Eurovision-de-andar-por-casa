@@ -29,15 +29,40 @@
 
             <section class="playlist-section">
                 <div class="playlist-header">
-                    <h3 class="section-title">CHOOSE A WINNER</h3>
+                    <h3 class="section-title">ESCOGE A TU GANADOR</h3>
                     <button class="btn-secondary" onclick="startMarathon()">▶ REPRODUCCIÓN CONTINUA</button>
                 </div>
                 
                 <div id="playlist" class="playlist-grid"></div>
             </section>
 
+           <section class="voting-section">
+                <div class="playlist-header">
+                    <h3 class="section-title">REPARTE TUS VOTOS</h3>
+                </div>
+                <div class="points-board">
+                    <div class="point-slot" data-points="1"><span class="points-label">1 POINT</span></div>
+                    <div class="point-slot" data-points="2"><span class="points-label">2 POINTS</span></div>
+                    <div class="point-slot" data-points="3"><span class="points-label">3 POINTS</span></div>
+                    <div class="point-slot" data-points="4"><span class="points-label">4 POINTS</span></div>
+                    <div class="point-slot" data-points="5"><span class="points-label">5 POINTS</span></div>
+                    <div class="point-slot" data-points="6"><span class="points-label">6 POINTS</span></div>
+                    <div class="point-slot" data-points="7"><span class="points-label">7 POINTS</span></div>
+                    <div class="point-slot" data-points="8"><span class="points-label">8 POINTS</span></div>
+                    <div class="point-slot highlight-10" data-points="10"><span class="points-label">10 POINTS</span></div>
+                    <div class="point-slot highlight-12" data-points="12"><span class="points-label">12 POINTS</span></div>
+                </div>
+            </section>
+
             <div class="action-bar">
-                <button class="btn-primary">START VOTING</button>
+                <button class="btn-primary" id="confirm-votes-btn">ENVIAR VOTOS</button>
+            </div>
+            <div id="custom-modal" class="modal-overlay">
+                <div class="modal-content">
+                    <h2 id="modal-title" class="modal-title">Título</h2>
+                    <div id="modal-body" class="modal-body">Mensaje</div>
+                    <button id="modal-close-btn" class="btn-primary" style="padding: 10px 30px; font-size: 1.1rem;">OK</button>
+                </div>
             </div>
         </main>
     </div>

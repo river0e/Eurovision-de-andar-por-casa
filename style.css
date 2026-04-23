@@ -40,7 +40,6 @@ body {
     border-radius: 12px;
 }
 
-
 .slogan-area {
     text-align: right;
 }
@@ -78,7 +77,7 @@ body {
     width: 100%; height: 100%;
 }
 
-/* --- PLAYLIST & TARJETAS --- */
+/* --- PLAYLIST --- */
 .playlist-header {
     display: flex;
     justify-content: space-between;
@@ -116,15 +115,30 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+    min-height: 150px;
 }
 
+/* --- TARJETAS (DRAG & DROP) --- */
 .song-card {
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
+    background-color: white;
+    border: 2px solid #eee;
     border-radius: 12px;
     overflow: hidden;
-    cursor: pointer;
+    cursor: grab;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 1; /* Por encima de la marca de agua */
+    width: 100%;
+}
+
+.song-card:active {
+    cursor: grabbing;
+}
+
+.song-card.dragging {
+    opacity: 0.5;
+    border: 3px dashed var(--ev-pink);
+    transform: scale(0.95);
 }
 
 .song-card:hover {
@@ -137,11 +151,13 @@ body {
     width: 100%;
     height: 120px;
     object-fit: cover;
-    background-color: #140049; /* Fondo de carga */
+    background-color: #140049;
+    pointer-events: none;
 }
 
 .card-body {
     padding: 15px;
+    pointer-events: none;
 }
 
 .card-info {
@@ -156,6 +172,79 @@ body {
     font-size: 0.8rem;
     color: var(--ev-pink);
     font-weight: 700;
+}
+
+/* --- SISTEMA DE VOTACIÓN --- */
+.voting-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+}
+
+.points-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.point-slot {
+    position: relative; /* Para centrar la marca de agua */
+    min-height: 220px;
+    border: 3px dashed var(--ev-blue);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.point-slot.highlight-12 {
+    border: 4px dashed var(--ev-pink);
+    background-color: #fff0f7;
+}
+
+.point-slot.highlight-10 {
+    border: 4px dashed var(--ev-yellow);
+    background-color: #ffffe6;
+}
+
+.point-slot.drag-over {
+    background-color: var(--ev-cyan);
+    border-color: var(--ev-dark-blue);
+    transform: scale(1.05);
+}
+
+/* --- MARCA DE AGUA AJUSTADA --- */
+.points-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--ev-dark-blue);
+    font-weight: 900;
+    font-size: 2rem; /* Tamaño reducido para que sea visible pero no moleste */
+    opacity: 0.1;
+    pointer-events: none;
+    margin: 0;
+    z-index: 0;
+    line-height: 1;
+}
+
+.highlight-12 .points-label {
+    color: var(--ev-pink);
+    font-size: 2rem; /* Un poco más grande para el 12 */
+    opacity: 0.15;
+}
+
+/* --- AJUSTE DE LA TARJETA EN EL HUECO --- */
+.point-slot .song-card {
+    transform: scale(0.9); /* Un poco más pequeña cuando está "encajada" */
+    margin: 0;
 }
 
 /* --- BOTÓN FINAL --- */
@@ -175,9 +264,151 @@ body {
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(255,0,128,0.3);
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 .btn-primary:hover {
     background-color: var(--ev-dark-blue);
+    transform: scale(1.05);
+}
+
+/* --- MODAL PERSONALIZADO --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 0, 73, 0.85); /* Azul oscuro transparente */
+    backdrop-filter: blur(5px); /* Efecto cristal borroso */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform: translateY(30px) scale(0.90);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto de rebote al abrir */
+    border: 5px solid var(--ev-pink);
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-title {
+    color: var(--ev-pink);
+    font-weight: 900;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.modal-body {
+    color: var(--ev-dark-blue);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* --- MODAL SCORECARD REFINADO --- */
+.modal-scorecard {
+    text-align: left;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px dashed var(--ev-blue);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 50vh; 
+    overflow-y: auto;
+}
+
+.modal-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border-left: 6px solid var(--ev-blue);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.modal-score-row[data-points="12"] { border-left-color: var(--ev-pink); background: #fff0f7; }
+.modal-score-row[data-points="10"] { border-left-color: var(--ev-yellow); background: #ffffe6; }
+.modal-score-row[data-points="8"] { border-left-color: var(--ev-cyan); background: #f0ffff; }
+
+.modal-score-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.modal-score-country {
+    font-weight: 900;
+    color: var(--ev-dark-blue);
+    font-size: 1rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-score-song {
+    font-size: 0.8rem;
+    color: var(--ev-pink);
+    margin: 2px 0 0 0;
+    font-weight: 700;
+}
+
+.modal-score-points {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--ev-dark-blue);
+    min-width: 35px;
+    text-align: right;
+}
+
+/* --- CONTENEDOR DE BOTONES IGUALADOS --- */
+.modal-footer-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: stretch; /* Hace que ambos tengan la misma altura */
+}
+
+.modal-footer-buttons .btn-primary, 
+.modal-footer-buttons .btn-secondary {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+    text-decoration: none;
+    margin: 0;
+    height: auto;
+    line-height: 1.2;
 }
