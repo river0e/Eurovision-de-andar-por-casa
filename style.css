@@ -412,3 +412,119 @@ body {
     height: auto;
     line-height: 1.2;
 }
+
+/* --- ESTILOS DEL MODO CAPITÁN Y WHATSAPP --- */
+
+/* Botón especial de WhatsApp */
+.btn-whatsapp {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #25D366; /* Color oficial de WhatsApp */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+.btn-whatsapp:hover {
+    background-color: #1ebe57;
+}
+
+/* Modal del capitán */
+.capitan-bar {
+    text-align: center; 
+    margin-top: 40px; 
+    padding-top: 20px; 
+    border-top: 1px solid #ddd;
+}
+.btn-capitan-open {
+    background: transparent; 
+    border: 1px solid #ccc; 
+    color: #777; 
+}
+.btn-capitan-open:hover {
+    background: #f0f0f0;
+}
+.capitan-title {
+    color: #ff9f43 !important; /* Usamos tu color secundario */
+}
+.capitan-textarea {
+    width: 100%; 
+    height: 120px; 
+    margin-bottom: 15px; 
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    font-family: monospace; 
+    resize: none;
+    box-sizing: border-box;
+}
+.btn-capitan-calc {
+    background-color: #ff9f43; /* Color secundario para destacarlo */
+    color: white;
+}
+
+#capitan-textarea {
+    width: 100%;
+    min-height: 100px;
+    max-height: 250px; /* Límite máximo para que no se coma toda la pantalla */
+    resize: vertical; /* Solo permite estirarlo arriba/abajo, no a los lados */
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: monospace;
+}
+
+/* --- NOTIFICACIÓN FLOTANTE (TOAST) --- */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px); /* Empieza escondido abajo */
+    background-color: var(--ev-pink, #ff007f); /* Tu color fucsia */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0, 0.3);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Efecto rebote */
+    z-index: 3000;
+    pointer-events: none;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0); /* Sube a su posición */
+    opacity: 1;
+}
+
+/* --- AJUSTES PARA MÓVILES (Pantallas pequeñas) --- */
+@media (max-width: 600px) {
+    /* Convierte la fila de botones en una columna */
+    .modal-content .action-bar,
+    .modal-footer-buttons {
+        flex-direction: column;
+        display: flex;
+    }
+    
+    /* Obliga a que los botones ocupen el 100% del ancho y tengan margen debajo */
+    .modal-content .action-bar button,
+    .modal-content .action-bar a.btn-primary,
+    .modal-footer-buttons .btn-primary, 
+    .modal-footer-buttons .btn-secondary {
+        width: 100% !important;
+        margin: 0 0 15px 0 !important; /* Fuerzo 15px de separación por abajo */
+    }
+
+    /* Le quitamos el margen al último botón de la lista para que no sobre espacio en la ventana */
+    .modal-content .action-bar > *:last-child,
+    .modal-footer-buttons > *:last-child {
+        margin-bottom: 0 !important;
+    }
+}

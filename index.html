@@ -54,19 +54,40 @@
                 </div>
             </section>
 
-            <div class="action-bar">
+<div class="action-bar">
                 <button class="btn-primary" id="confirm-votes-btn">ENVIAR VOTOS</button>
             </div>
+
             <div id="custom-modal" class="modal-overlay">
                 <div class="modal-content">
                     <h2 id="modal-title" class="modal-title">Título</h2>
                     <div id="modal-body" class="modal-body">Mensaje</div>
-                    <button id="modal-close-btn" class="btn-primary" style="padding: 10px 30px; font-size: 1.1rem;">OK</button>
+                    <div class="action-bar">
+                        <button id="modal-close-btn" class="btn-secondary">CERRAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn-secondary" onclick="abrirCapitan()">MODO CAPITÁN</button>
+            </div>
+
+            <div id="capitan-modal" class="modal-overlay">
+                <div class="modal-content">
+                    <h2 class="modal-title">CUARTEL DEL CAPITÁN</h2>
+                    <div class="modal-body">
+                        <p>Pega aquí todos los mensajes de WhatsApp que te han enviado tus amigos con sus votos:</p>
+                        <textarea id="capitan-textarea" placeholder="Pega los enlaces aquí..."></textarea>
+                    </div>
+                    <div class="action-bar">
+                        <button onclick="calcularTopCapitan()" class="btn-secondary">CALCULAR GANADOR</button>
+                        <button onclick="document.getElementById('capitan-modal').classList.remove('show')" class="btn-secondary">CANCELAR</button>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
-
+    <div id="toast-notificacion" class="toast">¡Enlace copiado con éxito!</div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
