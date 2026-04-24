@@ -1,0 +1,120 @@
+/* --- ESTRUCTURA ESPECÍFICA DEL TRIVIA --- */
+.trivia-container {
+    max-width: 1200px !important; /* Ensanchado para que quepan las 5 columnas */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Forzamos las 5 columnas coherentes con el index */
+.trivia-container .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 15px;
+    width: 100%;
+}
+
+.trivia-header {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.trivia-score {
+    font-weight: bold;
+    color: var(--ev-pink, #ff007f);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.trivia-question {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--ev-dark-blue, #000033);
+    margin-bottom: 25px;
+}
+
+/* Zona de soltar carta */
+.trivia-dropzone { 
+    width: 250px; 
+    min-height: 150px; 
+    margin: 0 auto; 
+    border: 3px dashed #ccc; 
+    border-radius: 12px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: #f9f9f9; 
+    transition: all 0.3s ease; 
+    position: relative;
+}
+
+.trivia-dropzone.drag-over { 
+    border-color: var(--ev-pink, #ff007f); 
+    background: #fff0f7; 
+    transform: scale(1.05); 
+}
+
+.trivia-dropzone.correct { border-color: #2ed573; background: #eafff1; }
+.trivia-dropzone.incorrect { border-color: #ff4757; background: #ffebee; animation: shake 0.5s; }
+
+@keyframes shake { 
+    0%, 100% {transform: translateX(0);} 
+    25% {transform: translateX(-10px);} 
+    75% {transform: translateX(10px);} 
+}
+
+.dropzone-hint { color: #aaa; font-weight: bold; pointer-events: none; }
+
+.trivia-playlist {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- ESTILOS DEL MARCADOR POR EQUIPOS --- */
+.team-score {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    color: #888;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.active-team {
+    background: var(--ev-dark-blue, #000033);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.team-score {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    color: #888;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+.active-team {
+    background: var(--ev-dark-blue, #000033);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .trivia-container .playlist-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+@media (max-width: 600px) {
+    .trivia-container .playlist-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .trivia-dropzone { width: 100%; max-width: 200px; }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivial | HOME-VISION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="minijuegos.css">
+
+    <script src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-area"><img src="logo-eurovision.png" alt="Logo Eurovisión" class="ev-logo"></div>
+                <div class="slogan-area">
+                    <p class="slogan-text">DRAG & DROP<br>TRIVIA</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <div class="action-bar" style="margin-bottom: 20px; text-align: left;">
+                <a href="index.html" class="btn-secondary" style="text-decoration: none; display: inline-block;">⬅
+                    VOLVER</a>
+            </div>
+            <div class="trivia-header">
+                <div class="trivia-score" style="display: flex; justify-content: center; gap: 20px;">
+                    <div id="score-euro-box" class="team-score">🔵 EQUIPO EURO: <span id="score-euro">0</span></div>
+                    <div id="score-vision-box" class="team-score">🟣 EQUIPO VISION: <span id="score-vision">0</span>
+                    </div>
+                </div>
+
+                <div class="trivia-question" id="pregunta-texto">Cargando...</div>
+
+                <div class="action-bar" style="justify-content: center; margin-bottom: 20px;">
+                    <button onclick="saltarPregunta()" class="btn-secondary" style="display: inline-block;">⏭ SALTAR
+                        PREGUNTA</button>
+                </div>
+
+                <div id="trivia-dropzone" class="trivia-dropzone" style="display: none;">
+                    <span class="dropzone-hint" id="dropzone-hint">¡Suelta la respuesta aquí!</span>
+                </div>
+            </div>
+
+            <div class="trivia-playlist">
+                <div id="trivia-grid" class="playlist-grid"></div>
+            </div>
+    </div>
+    </main>
+    </div>
+    <div id="setup-modal" class="modal-overlay show">
+        <div class="modal-content">
+            <h2 class="modal-title" style="color: var(--ev-dark-blue);">CONFIGURAR PARTIDA</h2>
+            <p style="margin-bottom: 20px;">¿A cuántas preguntas queréis jugar?</p>
+            <div class="action-bar" style="flex-wrap: wrap; justify-content: center; gap: 10px;">
+                <button onclick="empezarJuego(10)" class="btn-secondary" style="width: auto;">10</button>
+                <button onclick="empezarJuego(20)" class="btn-secondary" style="width: auto;">20</button>
+                <button onclick="empezarJuego(30)" class="btn-secondary" style="width: auto;">30</button>
+                <button onclick="empezarJuego(40)" class="btn-secondary" style="width: auto;">40</button>
+                <button onclick="empezarJuego(50)" class="btn-secondary" style="width: auto;">50</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="turno-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title" style="color: var(--ev-dark-blue);">¿QUIÉN HA SIDO MÁS RÁPIDO?</h2>
+            <div class="action-bar" style="flex-direction: column;">
+                <button onclick="asignarTurno('euro')" class="btn-primary"
+                    style="background: var(--ev-cyan, #00d2ff); color: var(--ev-dark-blue); margin-bottom: 10px; width: 100%;">🔵
+                    EQUIPO EURO</button>
+                <button onclick="asignarTurno('vision')" class="btn-primary"
+                    style="background: var(--ev-pink, #ff007f); width: 100%;">🟣 EQUIPO VISION</button>
+            </div>
+        </div>
+    </div>
+    <script src="minijuegos.js"></script>
+</body>
+
+</html>

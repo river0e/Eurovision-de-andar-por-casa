@@ -138,7 +138,7 @@ function setupVotingSystem() {
         });
 
         if (missingVotes) {
-            showModal('¡FALTAN PUNTOS!', 'Completa todas las casillas antes de enviar.', true);
+            showModal('¡EUROPES LIVING A CELEBRATION!', 'Completa todas las casillas antes de enviar.', true);
             return;
         }
 
