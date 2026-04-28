@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINGO LIVE | HOME-VISION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bingo.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-area">
+                    <img src="logo-eurovision.png" alt="Logo Eurovisión" class="ev-logo">
+                </div>
+                <div class="slogan-area">
+                    <p class="slogan-text">UNITED<br>BY MUSIC</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <div class="playlist-header">
+                <h3 class="section-title">EURO-BINGO EN VIVO</h3>
+                <button class="btn-secondary" onclick="generarCarton()">NUEVO CARTÓN</button>
+            </div>
+            
+            <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 20px;">
+                Toca cada casilla cuando ocurra en la gala. ¡Haz línea o bingo!
+            </p>
+
+            <div id="bingo-board" class="bingo-grid">
+                <!-- Las casillas se generan con JS -->
+            </div>
+
+            <div class="action-bar" style="margin-top: 30px;">
+                <a href="index.html" class="btn-secondary" style="text-decoration: none; display: inline-block;">⬅ VOLVER AL INICIO</a>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="bingo.js"></script>
+</body>
+<div id="toast-notificacion" class="toast">¡EURO-BINGO!</div>
+</html>

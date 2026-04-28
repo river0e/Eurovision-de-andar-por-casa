@@ -1,0 +1,157 @@
+
+
+/* --- DISEÑO DEL CONTENEDOR --- */
+.bingo-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* --- CUADRÍCULA (GRID) --- */
+.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 25px 0;
+}
+
+/* --- CASILLAS DEL BINGO (MEJORADAS) --- */
+.bingo-card {
+    aspect-ratio: 1 / 1;
+    background: #f8fafc;
+    border: 2px solid var(--ev-blue);
+    border-radius: 12px;
+    
+    /* Flexbox para centrar todo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px; /* Un poco más de aire */
+
+    /* Tipografía "Premium" */
+    font-family: var(--font-main), sans-serif;
+    font-size: clamp(0.8rem, 4vw, 1.3rem);     
+    font-weight: 800;       /* Más negrita para que destaque */
+    text-transform: uppercase; /* Todo en mayúsculas queda mucho más "evento" */
+    letter-spacing: 0.5px;  /* Espacio entre letras para elegancia */
+    color: var(--ev-dark-blue);
+    
+    /* Sombreado suave para que la letra no sea plana */
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+    
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    line-height: 1.1;
+    overflow: hidden;       /* Evita que el texto se salga */
+    word-wrap: break-word;  /* Parte las palabras si son muy largas */
+}
+
+/* Efecto al pasar el ratón para que se sienta vivo */
+.bingo-card:hover {
+    border-color: var(--ev-pink);
+    background: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    color: var(--ev-pink);
+}
+
+/* --- ESTADO MARCADO (¡CANTOSO!) --- */
+.bingo-card.marked {
+    background: linear-gradient(135deg, var(--ev-pink), #ff4db8);
+    color: white;
+    border-color: #fff;
+    text-decoration: line-through;
+    transform: scale(0.92);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(255, 0, 127, 0.3);
+}
+
+/* --- TOAST CENTRAL EUROVISIVO --- */
+#toast-notificacion {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5); /* Empieza pequeño y centrado */
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10001; /* Por encima de TODO */
+    
+    background: rgba(10, 10, 46, 0.95); /* Azul muy oscuro profundo */
+    color: white;
+    padding: 40px 60px;
+    border-radius: 30px;
+    border: 4px solid var(--ev-pink);
+    
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    
+    box-shadow: 0 0 50px rgba(255, 0, 127, 0.5), 
+                inset 0 0 20px rgba(0, 210, 255, 0.3);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    width: auto;
+    white-space: nowrap;
+}
+
+/* Cuando se activa */
+#toast-notificacion.bingo-show {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.5); }
+    50% { box-shadow: 0 0 60px rgba(0, 210, 255, 0.8); border-color: var(--ev-cyan); }
+    100% { box-shadow: 0 0 30px rgba(255, 0, 127, 0.5); }
+}
+
+/* --- RESPONSIVE OPTIMIZADO --- */
+@media (max-width: 600px) {
+   .bingo-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 de 2 en móvil */
+        gap: 12px;
+    }
+
+    .bingo-card {
+        /* Ya no necesitamos font-size aquí, clamp() se encarga */
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    #toast-notificacion {
+        width: 90%;
+        font-size: clamp(1.2rem, 6vw, 2rem); /* ¡El toast también es responsive ahora! */
+    }
+
+    .sticker-pedro {
+        width: 100px; /* Tamaño del mapache en móvil */
+        height: 100px;
+    }
+}
+
+/* Estilo para el Sticker */
+.sticker-pedro {
+    width: 120px; 
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    animation: pedroSpin 2s linear infinite; /* ¡Pedro tiene que girar! */
+}
+
+@keyframes pedroSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
