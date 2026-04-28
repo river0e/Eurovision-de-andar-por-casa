@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bingo.css">
+    <!-- CONTROL DE VISTA PREVIA (SOCIAL MEDIA) -->
+    <!-- Nombre del sitio -->
+    <meta property="og:site_name" content="Eurovision HOUSE CONTEST">
+    <!-- Título de la tarjeta -->
+    <meta property="og:title" content="¡Vive el Eurovision HOUSE CONTEST! 🎤✨">
+    <!-- Descripción -->
+    <meta property="og:description"
+        content="Bingo en vivo, Trivial VS y Cuartel del Capitán. ¡La fiesta de Eurovisión definitiva en tu propia casa!">
+    <!-- URL de la imagen (Asegúrate de que el nombre coincida con el paso 2) -->
+    <meta property="og:image" content="https://river0e.github.io/Eurovision-de-andar-por-casa/logo-eurovision.jpg">
+    <!-- URL de tu web -->
+    <meta property="og:url" content="https://river0e.github.io/Eurovision-de-andar-por-casa/">
+    <!-- Configuración para Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
 </head>
+
 <body>
     <div class="app-container">
         <header class="main-header">
@@ -26,7 +43,7 @@
                 <h3 class="section-title">EURO-BINGO EN VIVO</h3>
                 <button class="btn-secondary" onclick="generarCarton()">NUEVO CARTÓN</button>
             </div>
-            
+
             <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 20px;">
                 Toca cada casilla cuando ocurra en la gala. ¡Haz línea o bingo!
             </p>
@@ -36,7 +53,8 @@
             </div>
 
             <div class="action-bar" style="margin-top: 30px;">
-                <a href="index.html" class="btn-secondary" style="text-decoration: none; display: inline-block;">⬅ VOLVER AL INICIO</a>
+                <a href="index.html" class="btn-secondary" style="text-decoration: none; display: inline-block;">⬅
+                    VOLVER AL INICIO</a>
             </div>
         </main>
     </div>
@@ -44,4 +62,5 @@
     <script src="bingo.js"></script>
 </body>
 <div id="toast-notificacion" class="toast">¡EURO-BINGO!</div>
+
 </html>
